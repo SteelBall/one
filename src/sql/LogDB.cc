@@ -573,6 +573,9 @@ int LogDB::purge_log()
     oss << "DELETE FROM logdb WHERE timestamp > 0 AND log_index >= 0 "
         << "AND log_index < "  << delete_index;
 
+    NebulaLog::log("DDDDD", Log::ERROR, "Purge Command");
+    NebulaLog::log("DDDDD", Log::ERROR, oss);
+
     int rc = db->exec_wr(oss);
 
     pthread_mutex_unlock(&mutex);

@@ -798,9 +798,14 @@ void RaftManager::timer_action(const ActionRequest& ar)
         Nebula& nd    = Nebula::instance();
         LogDB * logdb = nd.get_logdb();
 
-        NebulaLog::log("RCM", Log::INFO, "Purging obsolete LogDB records");
+        NebulaLog::log("DDDDD", Log::INFO, "Purging obsolete LogDB records");
 
-        logdb->purge_log();
+        int rc = logdb->purge_log();
+
+        ostringstream oss;
+        oss << "Records purged. exit code: " << rc;
+
+        NebulaLog::log("DDDDD", Log::INFO, oss);
 
         purge_tics = 0;
     }
